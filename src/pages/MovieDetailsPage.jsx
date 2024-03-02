@@ -22,9 +22,12 @@ const MovieDetailsPage = () => {
         setMovieData(data);
     },[data])
 
+    const vote = movieData.vote_average * 10;
+    const date = new Date(movieData.release_date);
+    const year = date.getFullYear();
 
   return (
-    <main className="main">
+    <>
         {isLoading && <p>Loading data, please wait...</p>}
         {error && (<p className="error">{error}</p>)}
 
@@ -32,8 +35,8 @@ const MovieDetailsPage = () => {
         (movieData.title ?
         (<div>
             <img src={getImgUrl(movieData.poster_path)} width="500" alt={movieData.title} />
-            <h1>{movieData.title} ({movieData.release_date})</h1>
-        <p>User Score: {movieData.vote_average}</p>
+            <h1>{movieData.title} ({year})</h1>
+        <p>User Score: {vote}%</p>
         <h2>Overview</h2>
         {movieData.overview}
         <h2>Genres</h2>
@@ -50,7 +53,7 @@ const MovieDetailsPage = () => {
         <Outlet />    
         </div>
         ) : <p>No data to display</p>)}
-    </main>
+    </>
   )
 }
 

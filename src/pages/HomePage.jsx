@@ -21,11 +21,11 @@ const HomePage = () => {
     },[data])
   
     return (
-    <main className='main'>
+    <>
         {isLoading && <p>Loading data, please wait...</p>}
         {error && (<p>{error}</p>)}
         {!isLoading && !error && (movies.length ? <MovieList movies={movies} /> : <p>No movies to display!</p>)}
-    </main>
+    </>
   )
 }
 

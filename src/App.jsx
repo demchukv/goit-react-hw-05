@@ -16,6 +16,7 @@ function App() {
     <>
       <Navigation />
 
+      <main className='main'>
       <Suspense fallback={<div>Loading page...</div>}>
       <Routes>
         <Route path='/' element={<HomePage />} />
@@ -27,6 +28,7 @@ function App() {
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
       </Suspense>
+      </main>
     </>
   )
 }

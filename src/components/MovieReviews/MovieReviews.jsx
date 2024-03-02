@@ -19,7 +19,6 @@ const MovieReviews = () => {
   
   useEffect(() => {
       setReviewData(data.results);
-      console.log(data);
   },[data])
 
   
