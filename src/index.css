@@ -8,3 +8,22 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.main{
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.error{
+  color:red;
+  border: 1px solid red;
+  border-radius: 7px;
+  padding: 12px 24px;
+}
+
+.genres{
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-weight: 600;
+}

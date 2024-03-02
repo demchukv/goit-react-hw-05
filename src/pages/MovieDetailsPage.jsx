@@ -2,20 +2,21 @@ import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import useAxiosFetch from '../components/hooks/useAxiosFetch';
-import prepareUrl from '../components/api/themoviedb';
+import theMovieDbInstance from '../components/api/themoviedb';
+import getImgUrl from '../components/api/theMovieDbImg';
 
 const MovieDetailsPage = () => {
     
     const [movieData, setMovieData] = useState({});
     const { movieId } = useParams();
 
-    const searchParams = {
+    const params = {
         language: 'en-US',
         include_adult: false
     }
-    const fetchUrlData = prepareUrl(`/movie/${movieId}`, searchParams);
+    const searchParams = new URLSearchParams(params);
 
-    const { data, error, isLoading } = useAxiosFetch(fetchUrlData);
+    const { data, error, isLoading } = useAxiosFetch(`/movie/${movieId}?${searchParams}`, theMovieDbInstance);
 
     useEffect(() => {
         setMovieData(data);
@@ -23,18 +24,20 @@ const MovieDetailsPage = () => {
 
 
   return (
-    <>
+    <main className="main">
         {isLoading && <p>Loading data, please wait...</p>}
-        {error && (<p>{error}</p>)}
+        {error && (<p className="error">{error}</p>)}
 
-        {!isLoading && !error &&
+        {!isLoading && !error && 
+        (movieData.title ?
         (<div>
+            <img src={getImgUrl(movieData.poster_path)} width="500" alt={movieData.title} />
             <h1>{movieData.title} ({movieData.release_date})</h1>
         <p>User Score: {movieData.vote_average}</p>
         <h2>Overview</h2>
         {movieData.overview}
         <h2>Genres</h2>
-        <p>{movieData.length && movieData.genres.map(genre => {return (<span key={genre.id}>{genre.name}</span>)})}</p>
+        {movieData.genres && <p className="genres"> {movieData.genres.map(genre => {return (<span key={genre.id}>{genre.name}</span>)})}</p>}
         <p>Additional information</p>
         <ul>
             <li>
@@ -46,8 +49,8 @@ const MovieDetailsPage = () => {
         </ul>
         <Outlet />    
         </div>
-        )}
-    </>
+        ) : <p>No data to display</p>)}
+    </main>
   )
 }
 
