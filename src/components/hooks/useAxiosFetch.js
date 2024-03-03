@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
 
-const useAxiosFetch = ( url, axiosInstance) => {
+const useAxiosFetch = ( url, axiosInstance, skip = false) => {
 
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -12,9 +12,13 @@ const useAxiosFetch = ( url, axiosInstance) => {
         const source = axios.CancelToken.source();
         axiosInstance['cancelToken'] = source.token;
 
-        const fetchData = async (url, axiosInstance) => {
+        const fetchData = async (url, axiosInstance, skip) => {
                 setIsLoading(true);
-                try {
+                if(skip === true) {
+                    setIsLoading(false);
+                    return;
+                }
+                        try {
                     const response = await axiosInstance.get(url);
                     if (isMounted) {
                         setData(response.data);
@@ -30,7 +34,7 @@ const useAxiosFetch = ( url, axiosInstance) => {
                 }
         }
 
-        fetchData(url, axiosInstance);
+        fetchData(url, axiosInstance, skip);
 
         const cleanUp = () => {
             isMounted = false;
@@ -38,7 +42,7 @@ const useAxiosFetch = ( url, axiosInstance) => {
         }
 
         return cleanUp;
-    }, [url, axiosInstance]);
+    }, [url, axiosInstance, skip]);
 
     return { data, error, isLoading };
 }

@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import useAxiosFetch from '../components/hooks/useAxiosFetch';
-import theMovieDbInstance from '../components/api/themoviedb'
-import MovieList from "../components/MovieList/MovieList"
+import theMovieDbInstance from '../components/api/themoviedb';
+import MovieList from "../components/MovieList/MovieList";
 
 const HomePage = () => {
 
@@ -22,9 +22,10 @@ const HomePage = () => {
   
     return (
     <>
+        <h1>Trending today</h1>
         {isLoading && <p>Loading data, please wait...</p>}
-        {error && (<p>{error}</p>)}
-        {!isLoading && !error && (movies.length ? <MovieList movies={movies} /> : <p>No movies to display!</p>)}
+        {error && (<p className="error">{error}</p>)}
+        {!isLoading && !error && (movies.length ? <MovieList movies={movies} /> : <p className="error">No movies to display!</p>)}
     </>
   )
 }

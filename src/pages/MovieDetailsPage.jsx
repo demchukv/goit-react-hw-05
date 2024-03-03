@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import useAxiosFetch from '../components/hooks/useAxiosFetch';
 import theMovieDbInstance from '../components/api/themoviedb';
 import getImgUrl from '../components/api/theMovieDbImg';
+import BackLink from '../components/BackLink/BackLink';
 
 const MovieDetailsPage = () => {
     
     const [movieData, setMovieData] = useState({});
     const { movieId } = useParams();
+
+    const location = useLocation();
+    const backLinkHref = location.state?.from ?? "/";
 
     const params = {
         language: 'en-US',
@@ -22,12 +26,13 @@ const MovieDetailsPage = () => {
         setMovieData(data);
     },[data])
 
-    const vote = movieData.vote_average * 10;
+    const vote = Math.floor(movieData.vote_average * 10);
     const date = new Date(movieData.release_date);
     const year = date.getFullYear();
 
   return (
     <>
+        <BackLink to={backLinkHref}>Go back</BackLink>
         {isLoading && <p>Loading data, please wait...</p>}
         {error && (<p className="error">{error}</p>)}
 
@@ -52,7 +57,7 @@ const MovieDetailsPage = () => {
         </ul>
         <Outlet />    
         </div>
-        ) : <p>No data to display</p>)}
+        ) : <p className="error">No data to display</p>)}
     </>
   )
 }
