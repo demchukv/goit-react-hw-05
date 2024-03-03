@@ -8,7 +8,7 @@
     max-width: 500px;
 }
 .movieImg{
-    min-width: 200px;
+    width: 250px;
     max-width: 100%;
 }
 .movieTitle{
@@ -19,5 +19,13 @@
     .movieBaseInfo{
         flex-wrap: nowrap;
     }
-    
+    .movieImg{
+        width: 300px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .movieImg{
+        width: 500px;
+    }
 }

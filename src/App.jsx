@@ -3,7 +3,7 @@ import { Suspense, lazy } from 'react'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import './App.css'
 import Navigation from './components/Navigation/Navigation.jsx'
-import Loader from '../components/Loader/Loader';
+import Loader from './components/Loader/Loader';
 
 const HomePage = lazy(() => import('./pages/HomePage.jsx'));
 const MoviesPage = lazy(() => import('./pages/MoviesPage.jsx'));
