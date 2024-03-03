@@ -1,0 +1,18 @@
+.castList{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top:1px solid #111;
+    padding-top: 16px;
+}
+.castItem{
+    display: flex;
+    gap:8px;
+    margin-bottom: 8px;
+}
+.castPhoto{
+    max-width: 200px;
+}
+.castName{
+    font-weight: 600;
+}

@@ -1,0 +1,23 @@
+.movieBaseInfo{
+    display: flex;
+    flex-wrap: wrap;
+    gap:16px;
+    align-items: flex-start;
+}
+.moviePoster{
+    max-width: 500px;
+}
+.movieImg{
+    min-width: 200px;
+    max-width: 100%;
+}
+.movieTitle{
+    margin-top: 0;
+}
+
+@media screen and (min-width: 768px) {
+    .movieBaseInfo{
+        flex-wrap: nowrap;
+    }
+    
+}

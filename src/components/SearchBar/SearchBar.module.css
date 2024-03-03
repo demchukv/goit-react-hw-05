@@ -1,0 +1,31 @@
+.searchForm{
+    display: flex;
+    gap:2px;
+}
+.searchInput{
+    padding: 4px 8px;
+    border:1px solid #ccc;
+    outline: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.25s ease;
+}
+.searchInput:hover, .searchInput:focus, .searchInput:active{
+    border:1px solid #111;
+}
+.searchBtn{
+    display: inline-flex;
+    gap:4px;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 8px;
+    border:1px solid #ccc;
+    outline: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+.searchBtn:hover, .searchBtn:focus{
+    border: 1px solid #111;
+}

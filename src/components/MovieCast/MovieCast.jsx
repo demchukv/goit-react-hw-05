@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import useAxiosFetch from '../hooks/useAxiosFetch';
 import theMovieDbInstance from '../api/themoviedb'
 import getImgUrl from '../api/theMovieDbImg';
+import Loader from "../Loader/Loader";
+import css from './MovieCast.module.css';
 
 const MovieCast = () => {
 
@@ -22,19 +24,21 @@ const MovieCast = () => {
   },[data])
 
   return (
-      <div>
-      {isLoading && <p>Loading data, please wait...</p>}
+      <>
+      {isLoading && <Loader />}
       {error && (<p className="error">{error}</p>)}
 
       {!isLoading && !error && 
         (castData.length ?
-          castData.map(author => {
-            return (<li key={author.credit_id}><img src={getImgUrl(author.profile_path)} alt={author.name} width="500"></img><p>{author.original_name}</p><p>Character: {author.character}</p></li>)
-          })
+          (<ul className={css.castList}>
+          {castData.map(author => {
+            return (<li className={css.castItem} key={author.credit_id}><img className={css.castPhoto} src={getImgUrl(author.profile_path)} alt={author.name} width="500"></img><div><p className={css.castName}>{author.original_name}</p><p>Character: {author.character}</p></div></li>)
+          })}
+          </ul>)
           : (<p className="error">Data is empty!</p>)
         )
       }
-      </div>
+      </>
   )
 }
 

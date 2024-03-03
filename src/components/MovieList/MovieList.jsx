@@ -6,16 +6,17 @@ const MovieList = ({ movies }) => {
 
   return (
     <>
-    {movies.length &&
+    {movies.length > 0 ?
     (<ul>
         {movies.map(movie =>{
+            let year = new Date(movie.release_date).getFullYear();
             return (
             <li key={movie.id}>
-                <Link to={{pathname: "/movies/"+movie.id}} state={{ from: location }}>{movie.title}</Link>
+                <Link to={{pathname: "/movies/"+movie.id}} state={{ from: location }}>{movie.title} ({year})</Link>
             </li>
             );
         })}
-    </ul>)
+    </ul>) : <p className="info">No data to display</p>
     }
     </>
   )

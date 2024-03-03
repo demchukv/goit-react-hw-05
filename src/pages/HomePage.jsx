@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import useAxiosFetch from '../components/hooks/useAxiosFetch';
 import theMovieDbInstance from '../components/api/themoviedb';
 import MovieList from "../components/MovieList/MovieList";
+import Loader from '../components/Loader/Loader';
 
 const HomePage = () => {
 
@@ -23,9 +24,9 @@ const HomePage = () => {
     return (
     <>
         <h1>Trending today</h1>
-        {isLoading && <p>Loading data, please wait...</p>}
+        {isLoading && <Loader />}
         {error && (<p className="error">{error}</p>)}
-        {!isLoading && !error && (movies.length ? <MovieList movies={movies} /> : <p className="error">No movies to display!</p>)}
+        {!isLoading && !error && (movies.length ? <MovieList movies={movies} /> : <p className="info">No movies to display!</p>)}
     </>
   )
 }

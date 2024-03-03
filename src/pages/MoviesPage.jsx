@@ -4,6 +4,7 @@ import useAxiosFetch from '../components/hooks/useAxiosFetch';
 import theMovieDbInstance from '../components/api/themoviedb';
 import MovieList from "../components/MovieList/MovieList";
 import SearchBar from '../components/SearchBar/SearchBar';
+import Loader from '../components/Loader/Loader';
 
 const MoviesPage = () => {
 
@@ -36,8 +37,8 @@ const MoviesPage = () => {
 
   return (
     <>
-    <SearchBar value={params.query} handleSearch={handleSearch} />
-    {isLoading && <p>Loading data, please wait...</p>}
+    <SearchBar value={query} handleSearch={handleSearch} />
+    {isLoading && <Loader />}
     {error && (<p className="error">{error}</p>)}
     {!error && !isLoading && (movies.length > 0 && <MovieList movies={movies} />)}
     </>

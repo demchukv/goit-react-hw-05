@@ -22,6 +22,13 @@
   padding: 12px 24px;
 }
 
+.info{
+  color:blue;
+  border: 1px solid blue;
+  border-radius: 7px;
+  padding: 12px 24px;
+}
+
 .genres{
   display: flex;
   gap: 20px;

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { HiSearch } from 'react-icons/hi';
+import css from './SearchBar.module.css';
 
 const SearchBar = ({ handleSearch }) => {
 
@@ -20,17 +21,16 @@ const SearchBar = ({ handleSearch }) => {
 
 
   return (
-    <div>
-    <form onSubmit={handleSearch}>
+    <form onSubmit={handleSearch} className={css.searchForm}>
     <input
+      className={css.searchInput}
       type="text"
       name="query"
       value={value}
       onChange={checkValue}
     />
-    <button type="submit" ref={searchBtn}><HiSearch /> Search</button>
+    <button className={css.searchBtn} type="submit" ref={searchBtn}><HiSearch /> Search</button>
     </form>
-  </div>
   )
 }
 
