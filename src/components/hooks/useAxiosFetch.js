@@ -30,7 +30,7 @@ const useAxiosFetch = ( url, axiosInstance, skip = false) => {
                         setData([]);
                     }
                 }finally{
-                    isMounted && setTimeout(() => setIsLoading(false), 1000);
+                    isMounted && setTimeout(() => setIsLoading(false), 500);
                 }
         }
 

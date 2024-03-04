@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { HiSearch } from 'react-icons/hi';
@@ -32,6 +33,10 @@ const SearchBar = ({ handleSearch }) => {
     <button className={css.searchBtn} type="submit" ref={searchBtn}><HiSearch /> Search</button>
     </form>
   )
+}
+
+SearchBar.propTypes = {
+  handleSearch: PropTypes.func.isRequired,
 }
 
 export default SearchBar;

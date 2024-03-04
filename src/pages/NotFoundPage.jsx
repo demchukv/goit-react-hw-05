@@ -1,11 +1,13 @@
+import { Link } from "react-router-dom";
 
 const NotFoundPage = () => {
   return (
-    <main className="main">
+    <>
       <p>
         Sorry, page not found!
       </p>
-    </main>
+      <p>Start with <Link to="/">Home page</Link></p>
+    </>
   )
 }
 

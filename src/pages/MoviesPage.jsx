@@ -5,6 +5,8 @@ import theMovieDbInstance from '../components/api/themoviedb';
 import MovieList from "../components/MovieList/MovieList";
 import SearchBar from '../components/SearchBar/SearchBar';
 import Loader from '../components/Loader/Loader';
+/*import LoadMoreMovies from '../components/LoadMoreMoview/LoadMoreMovies';*/
+import PaginateMoviesList from '../components/PaginateMoviesList/PaginateMoviesList';
 
 const MoviesPage = () => {
 
@@ -16,6 +18,7 @@ const MoviesPage = () => {
   const { query } = params;
   
   const [movies, setMovies] = useState([]);
+  const [page, setPage] = useState(1);
   
   const handleSearch = (event) => {
     event.preventDefault();
@@ -28,19 +31,31 @@ const MoviesPage = () => {
     form.reset;
   }
   
-  const { data, error, isLoading } = useAxiosFetch(`/search/movie?${searchParams}&page=1&include_adult=false&language=en-US`, theMovieDbInstance, !query ?? true);
+  const { data, error, isLoading } = useAxiosFetch(`/search/movie?${searchParams}&page=${page}&include_adult=false&language=en-US`, theMovieDbInstance, !query ?? true);
 
   useEffect(() => {
-    setMovies(!data.results ? [] : data.results);
+    if(data !== null){
+      setMovies(!data.results ? [] : data.results);
+    }
     },[data]
   );
+
+  const loadSelectedPage = ({ selected: selectedPage }) => {
+    setPage(parseInt(selectedPage + 1));
+  }
 
   return (
     <>
     <SearchBar value={query} handleSearch={handleSearch} />
     {isLoading && <Loader />}
     {error && (<p className="error">{error}</p>)}
-    {!error && !isLoading && (movies.length > 0 && <MovieList movies={movies} />)}
+    {!error && !isLoading && 
+      (movies.length > 0 && 
+        <>
+          <MovieList movies={movies} />
+          {data.total_pages > 1 && <PaginateMoviesList onClick={loadSelectedPage} pageCount={data.total_pages} forcePage={page} />}
+        </>)
+    }
     </>
   )
 }

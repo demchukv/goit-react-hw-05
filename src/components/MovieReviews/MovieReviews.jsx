@@ -23,7 +23,6 @@ const MovieReviews = () => {
       setReviewData(data.results);
   },[data])
 
-  
   return (
     <div>
     {isLoading && <Loader />}
