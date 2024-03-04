@@ -35,7 +35,7 @@ const MovieReviews = () => {
           return (<li key={review.id}><p className={css.reviewAuthor}>Author: {review.author}</p><p>{review.content}</p></li>)
         })}
         </ul>)
-        : (<p className="info">We don't have any reviews for this movie.</p>)
+        : (<p className="info">We don&apos;t have any reviews for this movie.</p>)
       )
     }
     </div>

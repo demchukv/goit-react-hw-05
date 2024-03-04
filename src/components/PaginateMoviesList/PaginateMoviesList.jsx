@@ -4,6 +4,7 @@ import css from './PaginateMoviesList.module.css';
 
 const PaginateMoviesList = ({ onClick, pageCount, forcePage }) => {
   return (
+    <div>
     <ReactPaginate
         pageCount={pageCount}
         onPageChange={onClick}
@@ -20,6 +21,7 @@ const PaginateMoviesList = ({ onClick, pageCount, forcePage }) => {
         nextClassName={css.pageItem}
         previousClassName={css.pageItem}
     />
+    </div>
   )
 }
 
