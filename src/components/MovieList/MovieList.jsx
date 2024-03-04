@@ -10,7 +10,7 @@ const MovieList = ({ movies = [] }) => {
     {movies.length > 0 ?
     (<ul>
         {movies.map(movie =>{
-            let year = new Date(movie.release_date).getFullYear();
+            let year = movie.release_date ? new Date(movie.release_date).getFullYear() : '?';
             return (
             <li key={movie.id}>
                 <Link to={{pathname: "/movies/"+movie.id}} state={{ from: location }}>{movie.title} ({year})</Link>
