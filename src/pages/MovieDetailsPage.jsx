@@ -31,6 +31,7 @@ const MovieDetailsPage = () => {
     const vote = Math.floor(movieData.vote_average * 10);
     const year = movieData.release_date ? new Date(movieData.release_date).getFullYear() : "?";
 
+    
   return (
     <>
         {isLoading && <Loader />}
@@ -56,10 +57,10 @@ const MovieDetailsPage = () => {
             <h3>Additional information</h3>
             <ul>
                 <li>
-                    <Link to="cast" state={{ from: location }} >Cast</Link>
+                    <Link to="cast" state={{ from: backLinkHref }} >Cast</Link>
                 </li>
                 <li>
-                    <Link to="reviews" state={{ from: location }}>Reviews</Link>
+                    <Link to="reviews" state={{ from: backLinkHref }}>Reviews</Link>
                 </li>
             </ul>
             <Outlet />    
