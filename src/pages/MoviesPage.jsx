@@ -15,7 +15,7 @@ const MoviesPage = () => {
     () => Object.fromEntries([...searchParams]),
     [searchParams]
   );
-  console.log(searchParams.get("page"));
+  
   const { query, page } = params;
   
   const [movies, setMovies] = useState([]);

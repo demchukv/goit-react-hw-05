@@ -29,7 +29,7 @@ const MovieDetailsPage = () => {
     },[data])
 
     const vote = Math.floor(movieData.vote_average * 10);
-    const year = new Date(movieData.release_date).getFullYear();
+    const year = movieData.release_date ? new Date(movieData.release_date).getFullYear() : "?";
 
   return (
     <>
