@@ -15,10 +15,10 @@ const MoviesPage = () => {
     () => Object.fromEntries([...searchParams]),
     [searchParams]
   );
-  const { query } = params;
+  console.log(searchParams.get("page"));
+  const { query, page } = params;
   
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
   
   const handleSearch = (event) => {
     event.preventDefault();
@@ -27,21 +27,21 @@ const MoviesPage = () => {
     if(newQuery === ""){
       return;
     }
-    setSearchParams({ query: newQuery });
+    setSearchParams({ query: newQuery, page: !page ? 1 : page });
     form.reset;
   }
   
-  const { data, error, isLoading } = useAxiosFetch(`/search/movie?${searchParams}&page=${page}&include_adult=false&language=en-US`, theMovieDbInstance, !query ?? true);
+  const { data, error, isLoading } = useAxiosFetch(`/search/movie?${searchParams}&include_adult=false&language=en-US`, theMovieDbInstance, !query ?? true);
 
   useEffect(() => {
     if(data !== null){
       setMovies(!data.results ? [] : data.results);
     }
-    },[data]
+    },[data, query, page]
   );
 
   const loadSelectedPage = ({ selected: selectedPage }) => {
-    setPage(parseInt(selectedPage + 1));
+    setSearchParams({ query: !query ? "" : query, page: parseInt(selectedPage + 1) });
   }
 
   return (

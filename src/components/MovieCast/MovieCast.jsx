@@ -8,7 +8,7 @@ import css from './MovieCast.module.css';
 
 const MovieCast = () => {
 
-  const [castData, setCastData] = useState({});
+  const [castData, setCastData] = useState([]);
   const { movieId } = useParams();
   
   const params = {
@@ -20,7 +20,9 @@ const MovieCast = () => {
   const { data, error, isLoading } = useAxiosFetch(`/movie/${movieId}/credits?${searchParams}`, theMovieDbInstance);
   
   useEffect(() => {
-      setCastData(data.cast);
+    if(data !== null){
+      setCastData(!data.cast ? [] : data.cast);
+    }
   },[data])
 
   return (

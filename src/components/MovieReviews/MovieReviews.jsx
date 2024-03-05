@@ -7,7 +7,7 @@ import css from './MovieReviews.module.css';
 
 const MovieReviews = () => {
 
-  const [reviewData, setReviewData] = useState({});
+  const [reviewData, setReviewData] = useState([]);
   const { movieId } = useParams();
   
   const params = {
@@ -20,7 +20,9 @@ const MovieReviews = () => {
   const { data, error, isLoading } = useAxiosFetch(`/movie/${movieId}/reviews?${searchParams}`, theMovieDbInstance);
   
   useEffect(() => {
-      setReviewData(data.results);
+    if(data !== null){
+      setReviewData(!data.results ? [] : data.results);
+    }
   },[data])
 
   return (
